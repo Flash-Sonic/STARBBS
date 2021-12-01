@@ -1,0 +1,110 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    list-style-type: none;
+}
+
+html, body {
+
+    background-image: url("../image/loginBackground-1.jpg");
+    background-size: 100%;
+    overflow: hidden;
+
+    height: 100%;
+
+}
+
+.wrapper {
+    position: absolute;
+    width: 450px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, .9);
+    margin-left: -225px;
+    margin-top: -250px;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    text-align: center;
+
+    padding: 5px 40px;
+
+}
+
+.loginLogo {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 50px;
+    margin-bottom: 70px;
+    width: 200px;
+    border-bottom: 3px solid cornflowerblue;
+    color: cornflowerblue;
+}
+
+#userName {
+
+}
+
+#userName, #passWord, #verityCode {
+    width: 100%;
+    height: 38px;
+    margin-bottom: 10px;
+    border: rgba(0, 0, 0, .2) solid 1px;
+    font-size: 10px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#submit {
+    width: 62%;
+    height: 50px;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+    margin-top: 40px;
+    font-size: 25px;
+    color: white;
+    border: none;
+}
+
+#register {
+    width: 32%;
+    height: 50px;
+    border-radius: 5px;
+    background-color: lightblue;
+    margin-top: 40px;
+    font-size: 25px;
+    color: white;
+    border: none;
+}
+
+.back {
+    position: absolute;
+    color: white;
+    width: 120px;
+    top: -30px;
+    left: -10px;
+    font-size: 20px;
+
+}
+
+.verity-wrapper {
+    width: 100%;
+}
+
+#verityCode {
+    width: 40%;
+    float: left;
+}
+
+#CodePicture {
+    height: 38px;
+    background-color: red;
+}

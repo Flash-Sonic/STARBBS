@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+    <link rel="stylesheet" href="./css/postDetail.css">
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $(function () {
+            $.get("/post/category", {}, function (data) {
+                var lis = '<li ><a href="index.html?cid=' + data[0].cid + '">' + data[0].cname + '</a></li>'
+
+                for (var i = 1; i < data.length; i++) {
+                    lis += '<li ><a href="index.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>'
+                }
+                $("#category").html(lis);
+
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="top-bar-wrapper clearfix">
+    <div class="top-bar">
+        <div class="logo"></div>
+        <div class="search-box">
+            <input type="text" placeholder="请输入搜素关键词">
+            <div class="search-button"><i class="fa fa-search"></i></div>
+        </div>
+        <div class="shortcut">
+            <ul>
+                <li>用户登录</li>
+
+                <li>个人中心</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="theme-bar-wrapper">
+    <ul class="theme-bar" id="category">
+
+    </ul>
+</div>
+<div class="content-wrapper clearfix">
+    <div class="left-bar">
+        <div class="post-head">
+            这是帖子标题我我我我我我哇无无无无无无无无无无无无无我我我我我我哇无无无无无无无无无无无无无无无无无无无无无无
+        </div>
+        <div class="post-list clearfix">
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="poster">楼主</div>
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+
+
+                    </div>
+                    <div class="right-content">
+
+                        <div class="post-text">
+                            这是帖子正文：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖吞吞吐吐拖拖拖吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖凄凄切切群群群群群群群群群群群群群群群群群群群群群群群群群群群群群群群群群群群拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                        <div class="post-time">
+                            2021-11-20 5:00
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <div class="post-img-wrapper">
+                            <img src="image\lonelyFrog.jpg" id="post-img">
+                        </div>
+                        <div class="post-user-name">
+                            卢本伟
+                        </div>
+                    </div>
+                    <div class="right-content">
+                        <div class="post-text">
+                            这是帖子回复：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+                    </div>
+                    <div class="post-time">
+                        2021-11-20 6:00
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="page-button">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="reply-wrapper">
+                <div class="reply clearfix">
+                    <form>
+                        <textarea name="reply_content" class="reply-content" placeholder="发表你的回复"></textarea>
+                        <button type="button" class="submit_reply">回复</button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="right-bar clearfix">
+        <div class="reply-button">
+            <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <div>回复</div>
+
+        </div>
+
+
+        <div class="hot-post">
+            <div class="hot-head">
+                <i class="fa fa-certificate" aria-hidden="true"></i>&nbsp&nbsp热门帖子
+            </div>
+
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

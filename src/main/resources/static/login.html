@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S.T.A.R.BBS登录</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+
+        $(function () {
+            $("#submit").click(function () {
+                /*         $.ajax({
+                             type: "get",
+                             url: "user/login",
+
+                             xhrFields: {
+                                 withCredentials: true
+                             },
+                             crossDomain: true,
+                             data:$("#form").serialize(),
+                             success: function (data) {
+                                 if(data.flag){
+                                     //登录成功
+                                     location.href="index.html";
+                                 }else{
+                                     //登录失败
+                                     alert(1)
+                                 }
+                             }
+                         });
+         */
+
+
+                $.get("user/login", $("#form").serialize(), function (data) {
+                    if (data.flag) {
+                        //登录成功
+                        location.href = "index.html";
+                    } else {
+                        //登录失败
+                        alert(data.message);
+                        $('#kaptchaImage').attr('src', 'user/kaptcha?' + Math.floor(Math.random() * 100));
+                    }
+                })
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="back">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        返回首页
+    </div>
+
+    <form id="form">
+        <div class="loginLogo">
+            登录
+        </div>
+
+        <input type="text" name="userName" id="userName" placeholder="输入用户名">
+        <input type="password" name="passWord" id="passWord" placeholder="输入密码">
+        <!-- <div class="verity-wrapper clearfix">
+
+             <input type="text" name="verityCode" id="verityCode" placeholder="验证码">
+             <img src="image/loginBackground-1.jpg" id="CodePicture">
+         </div>-->
+        <div class="verity-wrapper clearfix">
+            <input type="text" class="form-control" id="verityCode" name="verityCode" placeholder="验证码">
+            <span class="p-new-code l-mar-r15">
+                <img src="user/kaptcha" class="reloadImage" id="kaptchaImage"
+                     width="121" height="40"/> </span>
+            <script type="text/javascript">
+                $(function () {
+                    $('#kaptchaImage').click(function () {
+                        $(this).attr('src', 'user/kaptcha?' + Math.floor(Math.random() * 100));
+                    })
+                });
+            </script>
+            <!-- <a href="javaScript:;" class="l-color9 reloadImage" >看不清楚，换一张</a>-->
+        </div>
+        <div class="btn-wrapper">
+            <button type="button" id="submit">登录</button>
+            <button type="button" id="register">注册</button>
+
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>

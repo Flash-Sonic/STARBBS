@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S.T.A.R.BBS</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="js/getParameter.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+
+    <script>
+
+
+        $(function () {
+            var cid = getParameter("cid");
+            $.get("/post/category", {}, function (data) {
+                if (cid == null) {
+                    var lis = '<li style="background-color: white"><a style="color: #1890ff" href="index.html?cid=' + data[0].cid + '">' + data[0].cname + '</a></li>'
+
+                    for (var i = 1; i < data.length; i++) {
+                        lis += '<li><a style="color: white" href="index.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>'
+                    }
+                } else {
+                    var lis = ''
+
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].cid == cid) {
+                            lis += '<li style="background-color: white"><a style="color: #1890ff" href="index.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>'
+                        } else {
+                            lis += '<li><a style="color: white" href="index.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>'
+                        }
+                    }
+                }
+
+                $("#category").html(lis);
+
+
+            })
+        })
+        $(function () {
+            var cid = getParameter("cid");
+            var pname = getParameter("pname");
+
+            if (pname) {
+                //url解码
+                pname = window.decodeURIComponent(pname);
+            }
+
+            load(cid, 1, null);
+        })
+
+        function load(cid, currentPage, pname) {
+            $.get("/post/list", {cid: cid, currentPage: currentPage, pname: pname}, function (pb) {
+                var lis = "";
+                var firstPage = '<li onclick="javascript:load(' + cid + ',1,' + pname + ')"><a href="javascript:void(0)">首页</a></li>';
+                var preNum = pb.current - 1 == 0 ? 1 : pb.current - 1;
+                var prePage = '<li onclick="javascript:load(' + cid + ',' + preNum + ',' + pname + ')"class="threeword"><a href="javascript:void(0)">上一页</a></li>';
+                lis += firstPage;
+                lis += prePage;
+                //分页效果
+                var begin;
+                var end;
+                if (pb.pages < 10) {
+                    begin = 1;
+                    end = pb.pages;
+                } else {
+                    begin = pb.current - 5;
+                    end = pb.current + 4;
+                    if (begin < 1) {
+                        begin = 1;
+                        end = begin + 9;
+                    }
+                    if (end > pb.pages) {
+                        end = pb.pages;
+                        begin = end - 9;
+                    }
+                }
+                for (var i = begin; i <= end; i++) {
+
+                    var li;
+                    //判断是否为当前页
+                    if (pb.current == i) {
+                        li = '<li class="active" onclick="javascript:load(' + cid + ',' + i + ',' + pname + ')"><a href="javascript:void(0)">' + i + '</a></li>'
+
+                    } else {
+                        li = '<li onclick="javascript:load(' + cid + ',' + i + ',' + pname + ')"><a href="javascript:void(0)">' + i + '</a></li>'
+
+                    }
+
+                    lis += li;
+                }
+
+                var nextNum = pb.current + 1 == pb.total + 1 ? pb.total : pb.current + 1;
+                var nextPage = '<li onclick="javascript:load(' + cid + ',' + nextNum + ',' + pname + ')" class="threeword"><a href="javascript:void(0)">下一页</a></li>'
+                var lastPage = '<li onclick="javascript:load(' + cid + ',' + pb.total + ',' + pname + ')" class="threeword"><a href="javascript:void(0)">末页</a></li>'
+
+                lis += nextPage;
+                lis += lastPage;
+                $("#page_button").html(lis);
+                var post_lis = "";
+                for (var i = 0; i < pb.records.length; i++) {
+                    var post = pb.records[i];
+                    var li = '<div class="post-content-box clearfix">' +
+                        '<div class="post-content clearfix">' +
+                            '<div class="left-content">' +
+                                '<img src="image\\lonelyFrog.jpg" class="post-img" style="display: block;width: 100%; margin: auto;">' +
+                            '</div>'+
+                            '<div class="right-content">' +
+                                '<div class="post-title-wrapper clearfix">' +
+                                    '<div class="post-title">' +
+                                        post.pname +
+                                    '</div>' +
+                                     '<div class="post-user-name">'+
+                                         '<i class="fa fa-user" aria-hidden="true"></i>'+
+                                         post.user.username +
+                                     '</div>' +
+                                '</div>'+
+                                '<div class="post-text">' +
+                                    post.pcontent +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>'
+                    post_lis += li;
+                }
+                $("#post_list").html(post_lis);
+                //定位到页面的顶部
+                window.scrollTo(0, 0);
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="top-bar-wrapper clearfix">
+    <div class="top-bar">
+        <div class="logo"></div>
+        <div class="search-box">
+            <input type="text" placeholder="请输入搜素关键词">
+            <div class="search-button"><i class="fa fa-search"></i></div>
+        </div>
+        <div class="shortcut">
+            <ul>
+                <li>
+                    <a href="login.html">用户登录</a>
+                </li>
+                <li>个人中心</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="theme-bar-wrapper">
+    <ul class="theme-bar" id="category">
+
+    </ul>
+</div>
+<div class="content-wrapper clearfix">
+    <div class="left-bar">
+        <div class="post-head">
+            <i class="fa fa-bolt" aria-hidden="true"></i>&nbsp&nbsp帖子
+        </div>
+        <div class="post-list clearfix" >
+            <div class="post-content-wrapper clearfix" id="post_list">
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            </div>
+            <div class="page-button">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="page_button">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="right-bar">
+        <a class="publish" href="publish.html">
+            <i class="fa fa-telegram" aria-hidden="true"></i>
+            发帖
+
+        </a>
+        <div class="hot-post">
+            <div class="hot-head">
+                <i class="fa fa-certificate" aria-hidden="true"></i>&nbsp&nbsp热门帖子
+            </div>
+
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+            <div class="hot-post-content">
+                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

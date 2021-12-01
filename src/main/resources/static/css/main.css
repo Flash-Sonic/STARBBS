@@ -1,0 +1,292 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    list-style-type: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    color: #999;
+    font-size: 16px;
+}
+
+body {
+    background-color: #f6f6f6 !important;
+}
+
+.clearfix::before,
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.top-bar-wrapper {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, .1);
+}
+
+.top-bar {
+    width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 35px;
+    width: 35px;
+    background-color: grey;
+}
+
+.shortcut {
+    display: block;
+}
+
+.shortcut li {
+    margin-left: 20px;
+    float: left;
+
+}
+
+.shortcut li:hover {
+    color: cornflowerblue;
+}
+
+.search-box {
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+
+}
+
+.search-box input {
+    display: block;
+    border: 2px solid #d9d9d9;
+    color: rgba(0, 0, 0, .3);
+    width: 200px;
+    height: 30px;
+
+}
+
+.search-button {
+    width: 40px;
+    height: 32px;
+    background-color: #1890ff;
+    line-height: 32px;
+    text-align: center;
+}
+
+.fa-search {
+    color: white;
+}
+
+input::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, .3);
+}
+
+.theme-bar-wrapper {
+    margin: 10px auto;
+    width: 1000px;
+    height: 60px;
+    line-height: 60px;
+    background-color: #1890ff;
+    overflow: hidden;
+}
+
+.theme-bar {
+    float: left;
+    margin-left: 40px;
+}
+
+.theme-bar li {
+    text-align: center;
+    margin-left: 2px;
+    width: 100px;
+    float: left;
+    color: white;
+    font-size: 20px;
+}
+
+.theme-active {
+    background-color: white !important;
+    color: #1890ff !important;
+}
+
+
+.content-wrapper {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.left-bar {
+    width: 690px;
+    float: left;
+    background-color: white;
+}
+
+.post-head {
+    width: 650px;
+    margin: 0 auto;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    padding-left: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    color: #191c22;
+    font-weight: bold;
+}
+
+.fa-bolt {
+    color: #1890ff;
+}
+
+.post-content-box {
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 10px 0px;
+}
+
+.post-content {
+    width: 90%;
+    margin: auto;
+}
+
+.left-content {
+    float: left;
+    width: 20%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+}
+.left-content img{
+    display: block;
+    width: 100%;
+    margin: auto;
+}
+
+.right-content {
+    float: left;
+    width: 80%;
+    height: 150px;
+}
+
+.post-title, .post-text {
+    float: left;
+    margin-left: 5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+}
+
+.post-title {
+    font-size: 20px;
+    max-width: 80%;
+    white-space: nowrap;
+}
+
+.post-user-name {
+    float: right;
+    color: #999;
+}
+
+.post-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    max-width: 90%;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #999999;
+}
+
+.right-content i {
+    color: #999;
+}
+
+.page-button ul {
+    float: right;
+    margin-right: 10px;
+}
+
+.publish {
+    display: block;
+    background: linear-gradient(-45deg, white 90%, #1890ff 90%, #1890ff 100%);
+    width: 100%;
+    height: 150px;
+    font-size: 40px;
+    text-align: center;
+    line-height: 150px;
+    color: #1890ff;
+    /*box-shadow: 0px 0px 2px 1px rgba(0,0,0,.3);*/
+}
+
+.hot-post {
+    width: 100%;
+    height: 400px;
+    margin-top: 10px;
+    background-color: white;
+    padding: 0 4px;
+}
+
+.right-bar {
+    width: 300px;
+    float: right;
+    height: 700px;
+}
+
+.post-img {
+    display: block;
+    width: 100%;
+    margin: auto;
+}
+
+.hot-head {
+    width: 95%;
+    margin: 0 auto;
+    height: 35px;
+    line-height: 35px;
+    background-color: white;
+    padding-left: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    color: #191c22;
+    font-weight: bold;
+}
+
+.hot-head i {
+    color: #1890ff;
+}
+
+.hot-post-content {
+    margin: 0px auto;
+    margin-top: 10px;
+    width: 90%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #999999;
+}
+
+.test1 {
+    height: 20px;
+}
+
+.theme-list {
+    text-align: center;
+    margin-left: 2px;
+    width: 100px;
+    float: left;
+    color: white;
+    font-size: 20px;
+}

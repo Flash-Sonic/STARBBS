@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="./css/userPage.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $(function () {
+            $.get("/post/category", {}, function (data) {
+                var lis = '<li ><a href="index.html?cid=' + data[0].cid + '">' + data[0].cname + '</a></li>'
+
+                for (var i = 1; i < data.length; i++) {
+                    lis += '<li ><a href="index.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>'
+                }
+                $("#category").html(lis);
+
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="top-bar-wrapper clearfix">
+    <div class="top-bar">
+        <div class="logo"></div>
+        <div class="shortcut">
+            <ul>
+                <li>用户登录</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="theme-bar-wrapper">
+    <ul class="theme-bar" id="category">
+
+    </ul>
+</div>
+<div class="user_detail_wrapper clearfix">
+    <div class="user_detail">
+        <div class="user_img">
+            <img src="image\lonelyFrog.jpg">
+        </div>
+        <div class="user_msg">
+            <div class="user_name">用户名：卢本伟</div>
+            <div class="user_email">邮箱：23333333333@163.com</div>
+        </div>
+    </div>
+
+</div>
+<div class="content-wrapper clearfix">
+    <div class="left-bar">
+        <div class="post-head">
+            <i class="fa fa-bolt" aria-hidden="true"></i>&nbsp&nbsp个人帖子
+        </div>
+        <div class="post-list clearfix">
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖发发发发发发付吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="post-content-box clearfix">
+                <div class="post-content clearfix">
+                    <div class="left-content">
+                        <img src="image\lonelyFrog.jpg" id="post-img">
+
+
+                    </div>
+                    <div class="right-content">
+                        <div class="post-title-wrapper clearfix">
+                            <div class="post-title">
+                                这是帖子标题
+                            </div>
+                            <div class="post-user-name">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                卢本伟
+                            </div>
+                        </div>
+
+                        <div class="post-text">
+                            这是帖子正文：
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-button">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="right-bar">
+        <div class="publish">
+            <div class="publish_inner">
+                <div class="publish_num_title">发帖数量</div>
+                <div class="publish_num">12</div>
+            </div>
+        </div>
+        <div class="publish">
+            <div class="publish_inner">
+                <div class="publish_num_title">回帖数量</div>
+                <div class="publish_num">14</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
