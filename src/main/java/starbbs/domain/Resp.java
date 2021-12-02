@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PostDetail {
+public class Resp {
     @TableId(type = IdType.AUTO)
     private int rid;
     private int pid;

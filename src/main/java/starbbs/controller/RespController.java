@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import starbbs.domain.Post;
-import starbbs.domain.PostDetail;
+import starbbs.domain.Resp;
 import starbbs.domain.User;
-import starbbs.service.Impl.PostDetailServiceImpl;
+import starbbs.service.Impl.RespServiceImpl;
 import starbbs.service.Impl.PostServiceImpl;
 import starbbs.service.Impl.UserServiceImpl;
 
@@ -19,23 +19,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/post/detail")
-public class PostDetailController {
+public class RespController {
 
     @Resource
-    private PostDetailServiceImpl postDetailService;
+    private RespServiceImpl respService;
     @Resource
     private PostServiceImpl postService;
     @Resource
     private UserServiceImpl userService;
 
+    @GetMapping("/lz")
+    public Post getlzPost(@RequestParam("pid") String pidStr){
+        int pid=1;
+        if(pidStr != null && pidStr.length() !=0 && !"null".equals(pidStr)) {
+            pid=Integer.parseInt(pidStr);
+        }
+        Post post = postService.getById(pid);
+        User user = userService.getById(post.getUid());
+        post.setUser(user);
+        return post;
+    }
+
     @GetMapping
-    public IPage<PostDetail> getResponsePage(HttpServletRequest request
+    public IPage<Resp> getResponsePage(HttpServletRequest request
             , @RequestParam("currentPage") String currentPageStr
             , @RequestParam("pid") String pidStr) {
 
-        int pid=1;
+        int pid = 1;
         //当前页码
-        int currentPage=0;
+        int currentPage = 0;
 
         if (pidStr != null && pidStr.length() != 0 && !"null".equals(pidStr)) {
             pid = Integer.parseInt(pidStr);
@@ -45,15 +57,17 @@ public class PostDetailController {
         } else {
             currentPage = 1;
         }
-        IPage<PostDetail> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(currentPage, 10);
-        LambdaQueryWrapper<PostDetail> lqw = new LambdaQueryWrapper<>();
-        lqw.eq(PostDetail::getPid, pid);
-        postDetailService.page(page, lqw);
-        List<PostDetail> records = page.getRecords();
-        for (PostDetail record : records) {
-            User user=userService.getById(record.getUid());
+        IPage<Resp> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(currentPage, 10);
+        LambdaQueryWrapper<Resp> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Resp::getPid, pid);
+        respService.page(page, lqw);
+        List<Resp> records = page.getRecords();
+        for (Resp record : records) {
+            User user = userService.getById(record.getUid());
             record.setUser(user);
             Post post = postService.getById(record.getPid());
+            User puser = userService.getById(post.getUid());
+            post.setUser(puser);
             record.setPost(post);
         }
         return page;

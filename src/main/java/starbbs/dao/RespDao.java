@@ -2,8 +2,8 @@ package starbbs.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import starbbs.domain.PostDetail;
+import starbbs.domain.Resp;
 
 @Mapper
-public interface PostDetailDao extends BaseMapper<PostDetail> {
+public interface RespDao extends BaseMapper<Resp> {
 }

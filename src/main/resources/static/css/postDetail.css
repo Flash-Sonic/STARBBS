@@ -119,10 +119,6 @@ input::-webkit-input-placeholder {
     color: #1890ff !important;
 }
 
-.theme-bar li:hover {
-    background-color: white;
-    color: #1890ff;
-}
 
 .content-wrapper {
     width: 1000px;

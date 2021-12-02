@@ -9,17 +9,160 @@
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/main.js"></script>
-    <script>
-        $(function () {
-            $.get("/post/category", {}, function (data) {
-                var lis = '<li ><a href="index.html?cid=' + data[0].cid + '">' + data[0].cname + '</a></li>'
+    <script src="js/getParameter.js"></script>
 
-                for (var i = 1; i < data.length; i++) {
-                    lis += '<li ><a href="index.html?cid=' + data[i].cid + '">' + data[i].cname + '</a></li>'
+    <script>
+        var LZ
+            $(function () {
+            $.get("/post/category", {}, function (data) {
+                var lis = ''
+
+                for (var i = 0; i < data.length; i++) {
+
+                        lis += '<li><a style="color: white" href="index.html?cid=' + data[i].cid + '"> <div style="color: white;">'+data[i].cname+'</div> </a></li>'
+
                 }
+
                 $("#category").html(lis);
 
             })
+        })
+
+        $(function () {
+            var pid = getParameter("pid");
+
+            $.get("/post/detail/lz",{pid: pid},function (lz) {
+                LZ=lz
+            })
+
+            load(pid, 1);
+        })
+
+        function load(pid, currentPage,) {
+            $.get("/post/detail", {pid: pid, currentPage: currentPage}, function (pb) {
+                var lis = "";
+                var firstPage = '<li onclick="javascript:load(' + pid + ',1)"><a href="javascript:void(0)">首页</a></li>';
+                var preNum = pb.current - 1 == 0 ? 1 : pb.current - 1;
+                var prePage = '<li onclick="javascript:load(' + pid + ',' + preNum + ')"class="threeword"><a href="javascript:void(0)">上一页</a></li>';
+                lis += firstPage;
+                lis += prePage;
+                //分页效果
+                var begin;
+                var end;
+                if (pb.pages < 10) {
+                    begin = 1;
+                    end = pb.pages;
+                } else {
+                    begin = pb.current - 5;
+                    end = pb.current + 4;
+                    if (begin < 1) {
+                        begin = 1;
+                        end = begin + 9;
+                    }
+                    if (end > pb.pages) {
+                        end = pb.pages;
+                        begin = end - 9;
+                    }
+                }
+                for (var i = begin; i <= end; i++) {
+
+                    var li;
+                    //判断是否为当前页
+                    if (pb.current == i) {
+                        li = '<li class="active" onclick="javascript:load(' + pid + ',' + i + ')"><a href="javascript:void(0)">' + i + '</a></li>'
+
+                    } else {
+                        li = '<li onclick="javascript:load(' + pid + ',' + i + ')"><a href="javascript:void(0)">' + i + '</a></li>'
+
+                    }
+
+                    lis += li;
+                }
+
+                var nextNum = pb.current + 1 == pb.total + 1 ? pb.total : pb.current + 1;
+                var nextPage = '<li onclick="javascript:load(' + pid + ',' + nextNum + ')" class="threeword"><a href="javascript:void(0)">下一页</a></li>'
+                var lastPage = '<li onclick="javascript:load(' + pid + ',' + pb.total + ')" class="threeword"><a href="javascript:void(0)">末页</a></li>'
+
+                lis += nextPage;
+                lis += lastPage;
+                $("#page_button").html(lis);
+
+                $("#post_head").text(LZ.pname);
+                var post_lis = "";
+                if(pb.current == 1)
+                {
+                    post_lis+=`<div class="post-content-box clearfix">
+                        <div class="post-content clearfix">
+                            <div class="left-content">
+                                <div class="poster">楼主</div>
+                                <div class="post-img-wrapper">
+                                    <img src="image\\lonelyFrog.jpg" class="post-img" style="display: block;width: 100%; margin: auto;">
+                                </div>
+
+                                <div class="post-user-name">
+                                    ${LZ.user.username}
+                                </div>
+
+
+                            </div>
+                            <div class="right-content">
+
+                                <div class="post-text">
+                                    ${LZ.pcontent}
+                                </div>
+                                <div class="post-time">
+                                    ${LZ.ptime}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>`
+                }
+                for (var i = 0; i < pb.records.length; i++) {
+                    var post = pb.records[i];
+                    var li = `<div class="post-content-box clearfix">
+                        <div class="post-content clearfix">
+                            <div class="left-content">
+                                <div class="post-img-wrapper">
+                                    <img src="image\\lonelyFrog.jpg" class="post-img" style="display: block;width: 100%; margin: auto;">
+                                </div>
+                                <div class="post-user-name">
+                                    ${post.user.username}
+                                </div>
+                            </div>
+                            <div class="right-content">
+                                <div class="post-text">
+                                    ${post.rcontent}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>`
+                    post_lis += li;
+                }
+
+                $("#post_list").html(post_lis);
+                //定位到页面的顶部
+                window.scrollTo(0, 0);
+            });
+        }
+
+        $(function () {
+            $("#submit_reply").click(function () {
+                var pid = getParameter("pid");
+                $.post(`/post/responsepublish/${pid}`,$("#form").serialize(),function (pdata) {
+                    if(!pdata.flag) {
+                        alert(pdata.message)
+                        location.reload()
+                    } else {
+                        alert(pdata.message)
+                        location.reload()
+                    }
+
+                })
+            })
+
         })
     </script>
 </head>
@@ -33,8 +176,9 @@
         </div>
         <div class="shortcut">
             <ul>
-                <li>用户登录</li>
-
+                <li>
+                    <a href="login.html">用户登录</a>
+                </li>
                 <li>个人中心</li>
             </ul>
         </div>
@@ -48,10 +192,11 @@
 </div>
 <div class="content-wrapper clearfix">
     <div class="left-bar">
-        <div class="post-head">
+        <div class="post-head" id="post_head">
             这是帖子标题我我我我我我哇无无无无无无无无无无无无无我我我我我我哇无无无无无无无无无无无无无无无无无无无无无无
         </div>
         <div class="post-list clearfix">
+            <div class="post-content-wrapper clearfix" id="post_list">
             <div class="post-content-box clearfix">
                 <div class="post-content clearfix">
                     <div class="left-content">
@@ -274,10 +419,11 @@
 
                 </div>
             </div>
+            </div>
 
-            <div class="page-button">
+            <div class="page-button" >
                 <nav aria-label="Page navigation">
-                    <ul class="pagination">
+                    <ul class="pagination" id="page_button">
                         <li>
                             <a href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
@@ -299,9 +445,9 @@
 
             <div class="reply-wrapper">
                 <div class="reply clearfix">
-                    <form>
-                        <textarea name="reply_content" class="reply-content" placeholder="发表你的回复"></textarea>
-                        <button type="button" class="submit_reply">回复</button>
+                    <form id="form">
+                        <textarea name="response_publish_content" class="reply-content" placeholder="发表你的回复"></textarea>
+                        <button type="button" class="submit_reply"  id="submit_reply">回复</button>
                     </form>
 
                 </div>
@@ -312,11 +458,13 @@
     </div>
 
     <div class="right-bar clearfix">
+        <a href="#submit_reply">
         <div class="reply-button">
+
             <i class="fa fa-commenting-o" aria-hidden="true"></i>
             <div>回复</div>
-
         </div>
+        </a>
 
 
         <div class="hot-post">

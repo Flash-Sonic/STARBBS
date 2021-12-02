@@ -52,6 +52,7 @@
         })
 
         function load(cid, currentPage, pname) {
+                var    Cid = getParameter("cid");
             $.get("/post/list", {cid: cid, currentPage: currentPage, pname: pname}, function (pb) {
                 var lis = "";
                 var firstPage = '<li onclick="javascript:load(' + cid + ',1,' + pname + ')"><a href="javascript:void(0)">首页</a></li>';
@@ -100,6 +101,7 @@
                 lis += lastPage;
                 $("#page_button").html(lis);
                 var post_lis = "";
+
                 for (var i = 0; i < pb.records.length; i++) {
                     var post = pb.records[i];
                     var li = '<div class="post-content-box clearfix">' +
@@ -110,7 +112,9 @@
                             '<div class="right-content">' +
                                 '<div class="post-title-wrapper clearfix">' +
                                     '<div class="post-title">' +
+                                        '<a href="postDetail.html?pid='+ post.pid + '">' +
                                         post.pname +
+                                        '</a>' +
                                     '</div>' +
                                      '<div class="post-user-name">'+
                                          '<i class="fa fa-user" aria-hidden="true"></i>'+
