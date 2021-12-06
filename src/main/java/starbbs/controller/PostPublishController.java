@@ -8,7 +8,6 @@ import starbbs.domain.Post;
 import starbbs.domain.R;
 import starbbs.domain.User;
 import starbbs.service.Impl.PostServiceImpl;
-import starbbs.service.Impl.UserServiceImpl;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +21,6 @@ public class PostPublishController {
 
     @Resource
     private PostServiceImpl postService;
-    @Resource
-    private UserServiceImpl userService;
 
     @PostMapping
     public R postPublish(HttpServletRequest request

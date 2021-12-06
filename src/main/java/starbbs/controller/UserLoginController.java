@@ -49,17 +49,6 @@ public class UserLoginController {
             return new R(false, message);
         }
 
-        /*没有实现验证码正常功能*/
-      /*  LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
-        lqw.eq(username != null, User::getUsername, username);
-        lqw.eq(password != null, User::getPassword, password);
-        User user = userService.getBaseMapper().selectOne(lqw);
-        String message = "用户名或密码错误";
-        if (user == null)
-            return new R(false, message);
-        else
-            return new R(true, user);*/
-
     }
 
 }

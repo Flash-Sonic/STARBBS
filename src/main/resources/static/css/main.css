@@ -41,9 +41,12 @@ body {
 .logo {
     height: 35px;
     width: 35px;
-    background-color: grey;
-}
 
+}
+.logo-img{
+    height: 35px;
+    width: 35px;
+}
 .shortcut {
     display: block;
 }

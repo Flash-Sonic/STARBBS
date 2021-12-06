@@ -24,4 +24,10 @@ public class R {
         this.flag = flag;
         this.message = message;
     }
+
+    public R(Boolean flag, String message, Object data) {
+        this.flag = flag;
+        this.message = message;
+        this.data = data;
+    }
 }

@@ -29,10 +29,10 @@ public class RespController {
     private UserServiceImpl userService;
 
     @GetMapping("/lz")
-    public Post getlzPost(@RequestParam("pid") String pidStr){
-        int pid=1;
-        if(pidStr != null && pidStr.length() !=0 && !"null".equals(pidStr)) {
-            pid=Integer.parseInt(pidStr);
+    public Post getlzPost(@RequestParam("pid") String pidStr) {
+        int pid = 1;
+        if (pidStr != null && pidStr.length() != 0 && !"null".equals(pidStr)) {
+            pid = Integer.parseInt(pidStr);
         }
         Post post = postService.getById(pid);
         User user = userService.getById(post.getUid());
@@ -58,9 +58,14 @@ public class RespController {
             currentPage = 1;
         }
         IPage<Resp> page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(currentPage, 10);
+
         LambdaQueryWrapper<Resp> lqw = new LambdaQueryWrapper<>();
         lqw.eq(Resp::getPid, pid);
         respService.page(page, lqw);
+        if (currentPage > page.getPages()) {
+            page.setCurrent(page.getPages());
+            respService.page(page, lqw);
+        }
         List<Resp> records = page.getRecords();
         for (Resp record : records) {
             User user = userService.getById(record.getUid());
