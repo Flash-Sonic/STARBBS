@@ -274,7 +274,7 @@ input::-webkit-input-placeholder {
     width: 90%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;

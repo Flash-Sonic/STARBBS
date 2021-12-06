@@ -75,9 +75,10 @@
             })
 
             load(pid, 1);
+            loadHot(1, 1,null);
         })
 
-        function load(pid, currentPage,) {
+        function load(pid, currentPage) {
             $.get("/post/detail", {pid: pid, currentPage: currentPage}, function (pb) {
                 var lis = "";
                 var firstPage = '<li onclick="javascript:load(' + pid + ',1)"><a href="javascript:void(0)">首页</a></li>';
@@ -187,6 +188,26 @@
             });
         }
 
+        function loadHot(cid, currentPage, pname){
+
+
+            $.get("/post/list", {cid: cid, currentPage: currentPage, pname: pname}, function (pb) {
+                var hot_lis="";
+                for(var i = 0; i < pb.records.length; i++)
+                {
+                    var li=`
+                                <a class="hot-post-content" href="postDetail.html?pid=${pb.records[i].pid}">${pb.records[i].pname}</a>
+                            `
+                    hot_lis+=li;
+
+                }
+                $("#hot_post").html(hot_lis);
+
+            })
+
+
+        }
+
         $(function () {
             $("#submit_reply").click(function () {
                 var pid = getParameter("pid");
@@ -276,23 +297,7 @@
             <div class="hot-head">
                 <i class="fa fa-certificate" aria-hidden="true"></i>&nbsp&nbsp热门帖子
             </div>
-
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
-
-            </div>
-
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
-
-            </div>
-
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
-
-            </div>
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+            <div id="hot_post">
 
             </div>
 

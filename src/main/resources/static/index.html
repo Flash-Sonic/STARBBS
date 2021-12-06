@@ -95,6 +95,7 @@
             }
 
             load(cid, 1, pname);
+            loadHot(cid,1,null);
         })
 
         function load(cid, currentPage, pname) {
@@ -148,6 +149,7 @@
                 $("#page_button").html(lis);
                 var post_lis = "";
 
+
                 for (var i = 0; i < pb.records.length; i++) {
                     var post = pb.records[i];
                     var li = '<div class="post-content-box clearfix">' +
@@ -175,6 +177,7 @@
                         '</div>'
                     post_lis += li;
                 }
+
                 $("#post_list").html(post_lis);
                 if(pb.total == 0) {
                     alert("当前主题不包含相关帖子")
@@ -183,6 +186,24 @@
                 //定位到页面的顶部
                 window.scrollTo(0, 0);
             });
+        }
+        function loadHot(cid, currentPage, pname){
+            var Cid = getParameter("cid");
+            $.get("/post/list", {cid: cid, currentPage: currentPage, pname: pname}, function (pb) {
+                var hot_lis="";
+                for(var i = 0; i < pb.records.length; i++)
+                {
+                    var li=`
+                                <a class="hot-post-content" href="postDetail.html?pid=${pb.records[i].pid}">${pb.records[i].pname}</a>
+                            `
+                    hot_lis+=li;
+
+                }
+                $("#hot_post").html(hot_lis);
+
+            })
+
+
         }
     </script>
 </head>
@@ -238,27 +259,11 @@
             发帖
 
         </a>
-        <div class="hot-post">
+        <div class="hot-post" >
             <div class="hot-head">
                 <i class="fa fa-certificate" aria-hidden="true"></i>&nbsp&nbsp热门帖子
             </div>
-
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
-
-            </div>
-
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
-
-            </div>
-
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
-
-            </div>
-            <div class="hot-post-content">
-                这里是热门帖子吞吞吐吐拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖拖
+            <div id="hot_post">
 
             </div>
 
