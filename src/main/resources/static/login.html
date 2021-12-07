@@ -12,27 +12,6 @@
 
         $(function () {
             $("#submit").click(function () {
-                /*         $.ajax({
-                             type: "get",
-                             url: "user/login",
-
-                             xhrFields: {
-                                 withCredentials: true
-                             },
-                             crossDomain: true,
-                             data:$("#form").serialize(),
-                             success: function (data) {
-                                 if(data.flag){
-                                     //登录成功
-                                     location.href="index.html";
-                                 }else{
-                                     //登录失败
-                                     alert(1)
-                                 }
-                             }
-                         });
-         */
-
 
                 $.get("user/login", $("#form").serialize(), function (data) {
                     if (data.flag) {
@@ -46,7 +25,9 @@
                     }
                 })
             });
-
+            $("#register").click(function () {
+                location.href= "register.html"
+            })
         });
 
     </script>
@@ -55,7 +36,7 @@
 <div class="wrapper">
     <div class="back">
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
-        返回首页
+        <a style="color: white" href="index.html">返回首页</a>
     </div>
 
     <form id="form">
