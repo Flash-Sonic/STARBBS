@@ -33,6 +33,9 @@ public class UserLoginController {
         //保证验证码只能用一次
         session.removeAttribute(Constants.KAPTCHA_SESSION_KEY);
         if (sessionCode != null && sessionCode.equalsIgnoreCase(code)) {
+            if(username == null || password == null) {
+                return new R(false,"用户名或密码不能为空");
+            }
             LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
             lqw.eq(username != null, User::getUsername, username);
             lqw.eq(password != null, User::getPassword, password);
