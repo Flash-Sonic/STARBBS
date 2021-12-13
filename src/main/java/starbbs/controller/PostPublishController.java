@@ -35,6 +35,9 @@ public class PostPublishController {
             message="发布失败，请先登录";
             return new R(false,message);
         }
+        if(pname.length() == 0 || pcontent.length() == 0) {
+            return new R(false,"标题或内容不能为空");
+        }
         int uid = user.getUid();
         int cid=0;
         if (cidStr != null && cidStr.length() != 0 && !"null".equals(cidStr)) {

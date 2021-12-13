@@ -29,6 +29,9 @@ public class PostResponsePublishController {
             message="发布评论失败，请先登录";
             return new R(false,message);
         }
+        if(rcontent.length() == 0) {
+            return new R(false,"内容不能为空");
+        }
         int uid = user.getUid();
         int pid=1;
         if (pidStr != null && pidStr.length() != 0 && !"null".equals(pidStr)) {
